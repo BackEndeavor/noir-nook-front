@@ -1,17 +1,18 @@
 <script lang="ts">
-    import Card from "$lib/ui/Card.svelte";
+    import Card from "$lib/ui/card/Card.svelte";
+    import CardBody from "$lib/ui/card/CardBody.svelte";
 </script>
 
 <div class="flex flex-col w-full">
     <Card class="self-center my-4"></Card>
     <div class="divider w-4 self-center"></div>
-    <div class="card w-96 self-center bg-base-200 shadow-xl my-4">
-        <div class="card-body items-center">
+    <Card class="self-center w-96 my-4">
+        <CardBody class="items-center">
             <p class="font-light">Advertisement</p>
             <h2 class="card-title">You can place ads!</h2>
             <p class="font-light">400x200</p>
-        </div>
-    </div>
+        </CardBody>
+    </Card>
     <div class="flex flex-col self-center my-16">
         <p class="font-bold">Latest Post</p>
         <div class="divider"></div>
