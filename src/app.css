@@ -4,5 +4,5 @@
 
 * {
     transition: .5s ease-in-out;
-    transition-property: background-color, border-color, text-color;
+    transition-property: background-color, border-color, text-color, border-bottom-color, border-left-color, border-right-color, border-top-color;
 }

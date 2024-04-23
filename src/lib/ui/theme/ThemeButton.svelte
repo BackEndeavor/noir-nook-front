@@ -3,7 +3,7 @@
     import Moon from "$lib/icon/Moon.svelte";
 </script>
 
-<label class="swap swap-rotate btn btn-ghost">
+<label class="swap swap-rotate btn btn-ghost {$$props.class || ''}">
     <!-- this hidden checkbox controls the state -->
     <input type="checkbox" class="theme-controller" value="light"/>
 

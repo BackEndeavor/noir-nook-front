@@ -23,12 +23,28 @@
         <p class="font-bold">Latest Post</p>
         <Divider></Divider>
         <div class="grid grid-cols-3 gap-4 self-center">
-            <Card class="col-span-3 lg:col-span-1"></Card>
-            <Card class="col-span-3 lg:col-span-1"></Card>
-            <Card class="col-span-3 lg:col-span-1"></Card>
-            <Card class="col-span-3 lg:col-span-1"></Card>
-            <Card class="col-span-3 lg:col-span-1"></Card>
-            <Card class="col-span-3 lg:col-span-1"></Card>
+            {#await data.products}
+                <Card class="col-span-3 lg:col-span-1"></Card>
+                <Card class="col-span-3 lg:col-span-1"></Card>
+                <Card class="col-span-3 lg:col-span-1"></Card>
+                <Card class="col-span-3 lg:col-span-1"></Card>
+                <Card class="col-span-3 lg:col-span-1"></Card>
+                <Card class="col-span-3 lg:col-span-1"></Card>
+            {:then products}
+                {#each products as product}
+                    <Card class="col-span-3 lg:col-span-1">
+                        <CardImage>
+                            <img src="{product.thumbnail}" alt="{product.description}">
+                        </CardImage>
+                        <CardBody>
+                            <CardTitle>{product.title}</CardTitle>
+                            <p>{product.description}</p>
+                        </CardBody>
+                    </Card>
+                {/each}
+            {:catch error}
+                <p>Error {error}</p>
+            {/await}
         </div>
     </div>
     <Join class="self-center">
