@@ -42,8 +42,8 @@
                             <img alt={data?.session?.user?.name} src={data?.session?.user?.image}/>
                         </div>
                     </div>
-                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2  border border-neutral bg-base-200 rounded-box w-48">
-                        <li><a>Profile</a></li>
+                    <ul tabindex="0" class="dropdown-content overflow-hidden z-[1] menu p-2  border border-neutral bg-base-200 rounded-box w-48">
+                        <li><a>{data?.session?.user?.name}</a></li>
                         <li>
                             <SignOut signOutPage="signout"></SignOut>
                         </li>
