@@ -1,4 +1,4 @@
-import {SvelteKitAuth} from "@auth/sveltekit"
+import {type Session, SvelteKitAuth} from "@auth/sveltekit"
 import GitHub from "@auth/sveltekit/providers/github"
 import Google from "@auth/sveltekit/providers/google"
 
@@ -28,6 +28,12 @@ async function refreshAccessToken(refreshToken: string) {
     })
 }
 
+export type Token = {
+    access_token: string
+}
+
+export type SessionWithToken = Session & Token
+
 export type CreateTokenResponse = {
     access: string,
     refresh: string,
@@ -44,7 +50,7 @@ export const {handle, signIn, signOut} = SvelteKitAuth({
     providers: [Google, GitHub],
     callbacks: {
         async session({session, token}) {
-            return {...session, access_token: token.access_token, error: token.error}
+            return {...session, access_token: token.access_token}
         }, async jwt({token, account}) {
             const accessExpirationDate = token.access_expiration as number | undefined
             const refreshExpirationDate = token.refresh_expiration as number | undefined
