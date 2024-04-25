@@ -63,7 +63,7 @@ export const {handle, signIn, signOut} = SvelteKitAuth({
                 token.refresh_expiration = new Date(response.refresh_expiration).getTime()
             } else if (accessExpirationDate && Date.now() < accessExpirationDate) {
                 return token;
-            } else if (refreshExpirationDate && Date.now() < refreshExpirationDate) {
+            } else if (refreshExpirationDate && Date.now() > refreshExpirationDate) {
                 // TODO: Handle refresh token expiration through throwing error
                 return token
             } else if (refreshToken) {
