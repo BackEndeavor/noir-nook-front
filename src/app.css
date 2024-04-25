@@ -6,3 +6,8 @@
     transition: .5s ease-in-out;
     transition-property: background-color, border-color, text-color, border-bottom-color, border-left-color, border-right-color, border-top-color;
 }
+
+:root {
+    --glass-reflex-opacity: 0;
+    --glass-blur: 0.7;
+}

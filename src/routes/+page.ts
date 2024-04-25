@@ -1,17 +1,12 @@
 import type {PageLoad} from './$types';
+import {fetchPosts} from "../backend";
 
-export type Product = {
-    title: string,
-    description: string,
-    brand: string,
-    thumbnail: string
-}
+export const load = ( async ({ url, parent }) => {
+    const data = await parent()
 
-export const load = ( async ({ fetch }) => {
-    const response = fetch('https://dummyjson.com/products')
-
-    const products = response.then(data => data.json()).then(data => data.products as Product[])
+    const page = Number(url.searchParams.get('page')) || 1
+    const posts = fetchPosts(data.session.access_token, page)
     return {
-        products
+        posts
     }
 }) satisfies PageLoad;
