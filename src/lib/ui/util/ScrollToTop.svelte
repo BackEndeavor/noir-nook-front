@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let scrollHeightTrigger = 10;
+    export let scrollHeightTrigger = 100;
     let button: HTMLButtonElement;
 
     function scrollToTop() {
