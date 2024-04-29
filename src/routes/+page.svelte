@@ -56,11 +56,11 @@
                                     <Tooltip data="Read time" class="flex">
                                         <iconify-icon class="neutral" icon="mdi:clock" width="32" height="32"></iconify-icon>
                                     </Tooltip>
-                                    <span class="font-medium pr-2">8 min</span>
+                                    <span class="font-medium pr-2 line-clamp-1">{post.relative_time}</span>
                                     <Tooltip data="View count" class="flex">
                                         <iconify-icon class="neutral" icon="mdi:eye" width="32" height="32"></iconify-icon>
                                     </Tooltip>
-                                    <span class="font-medium pr-2">100</span>
+                                    <span class="font-medium pr-2 line-clamp-1">{post.formatted_views}</span>
                                 </div>
                                 <p>{post.content}</p>
                                 <CardActions>

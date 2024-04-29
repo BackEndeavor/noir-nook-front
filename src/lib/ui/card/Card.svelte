@@ -5,7 +5,7 @@
     import CardActions from "$lib/ui/card/CardActions.svelte";
 </script>
 
-<div class="card w-80 bg-base-200 border border-base-300 border-solid border- shadow-xl {$$props.class || ''}">
+<div class="card bg-base-200 border border-base-300 border-solid shadow-xl {$$props.class || ''}">
     <slot>
         <CardImage></CardImage>
         <CardBody>
