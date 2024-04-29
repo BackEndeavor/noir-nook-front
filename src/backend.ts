@@ -1,6 +1,6 @@
 const BACKEND_URL = 'http://localhost:8000/api/posts'
 
-const PAGE_LIMIT = 10
+const PAGE_LIMIT = 9
 
 export type PostResult = {
     count: number,
@@ -25,7 +25,7 @@ export const fetchPosts = (access_token: string, page: number, limit: number = P
         headers: {
             'Authorization': `Bearer ${access_token}`
         },
-    }).then(data => data.json()).then(data => data as PostResult).then(data => {
+    }).then(async data => data.json()).then(data => data as PostResult).then(data => {
         data.totalPages = Math.ceil(data.count / limit)
         data.limit = limit
         data.currentPage = page
