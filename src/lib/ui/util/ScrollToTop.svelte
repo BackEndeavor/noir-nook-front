@@ -14,8 +14,8 @@
 
 <svelte:window on:scroll={handleScroll}/>
 
-<div class="fixed right-0 bottom-0 m-8">
-    <button class="btn btn-accent btn-circle transition duration-300 {$$props.class || ''}" on:click={() => scrollToTop()} bind:this={button}>
+<div class="fixed right-0 bottom-0 m-4">
+    <button class="btn btn-accent btn-circle transition duration-300 opacity-0 {$$props.class || ''}" on:click={() => scrollToTop()} bind:this={button}>
         <iconify-icon class="neutral" icon="mdi:arrow-top-bold" width="32" height="32"></iconify-icon>
     </button>
 </div>
