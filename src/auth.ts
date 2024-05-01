@@ -29,7 +29,8 @@ async function refreshAccessToken(refreshToken: string) {
 }
 
 export type Token = {
-    access_token: string
+    user_id: number,
+    access_token: string,
 }
 
 export type SessionWithToken = Session & Token
@@ -38,7 +39,16 @@ export type CreateTokenResponse = {
     access: string,
     refresh: string,
     access_expiration: string,
-    refresh_expiration: string
+    refresh_expiration: string,
+    user: TokenUser
+}
+
+export type TokenUser = {
+    pk: number,
+    username: string,
+    email: string,
+    first_name: string,
+    second_name: string,
 }
 
 export type RefreshTokenResponse = {
@@ -50,13 +60,24 @@ export const {handle, signIn, signOut} = SvelteKitAuth({
     providers: [Google, GitHub],
     callbacks: {
         async session({session, token}) {
-            return {...session, access_token: token.access_token}
+            return {...session, access_token: token.access_token, user_id: token.user_id}
         }, async jwt({token, account}) {
             const accessExpirationDate = token.access_expiration as number | undefined
             const refreshExpirationDate = token.refresh_expiration as number | undefined
             const refreshToken = token.refresh_token as string | undefined
             if (account && AVAILABLE_PROVIDERS.includes(account.provider)) {
-                const response = await authenticate(account.provider, account.access_token).then(data => data.json()).then(data => data as CreateTokenResponse)
+                const response = await authenticate(account.provider, account.access_token).then(async data => {
+                    if (data.status !== 200) {
+                        const body = await data.json();
+                        // TODO: Properly show error
+                        console.log(data.status)
+                        console.log(data.statusText)
+                        console.log(body)
+                        return body;
+                    }
+                    return data.json();
+                }).then(data => data as CreateTokenResponse)
+                token.user_id = response.user.pk
                 token.access_token = response.access
                 token.refresh_token = response.refresh
                 token.access_expiration = new Date(response.access_expiration).getTime()
