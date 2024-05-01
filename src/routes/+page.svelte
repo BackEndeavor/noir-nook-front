@@ -39,10 +39,10 @@
                 <button class="join-item btn">100</button>
             </Join>
         {:then postResult}
-            {#if postResult}
+            {#if postResult && !postResult.ok}
                 <div class="grid grid-cols-3 gap-4 self-center">
                     {#each postResult.results as post}
-                        <Card class="col-span-3 lg:col-span-1">
+                        <Card class="col-span-3 lg:col-span-1 max-w-96">
                             <CardImage>
                                 {#if post.image_preview}
                                     <img src="{post.image_preview}" class="h-48" alt="{post.title}">
@@ -62,7 +62,7 @@
                                     </Tooltip>
                                     <span class="font-medium pr-2 line-clamp-1">{post.formatted_views}</span>
                                 </div>
-                                <p>{post.content}</p>
+                                <p class="line-clamp-6">{post.content}</p>
                                 <CardActions>
                                     <a class="btn btn-primary my-4" href="/post/{post.id}">Read More...</a>
                                 </CardActions>
@@ -95,17 +95,20 @@
                     <iconify-icon icon="material-symbols:error" width="32" height="32"></iconify-icon>
                     <div>
                         <h3 class="font-bold">Cannot load posts!</h3>
-                        <div class="text-xs">Undefined error, maybe server is down :(</div>
+                        {#if postResult?.errorMessage}
+                            <div class="text-xs">{postResult.errorMessage}</div>
+                        {:else}
+                            <div class="text-xs">Undefined error, maybe server is down :(</div>
+                        {/if}
                     </div>
                 </Alert>
             {/if}
         {:catch error}
-            <p>Error {error}</p>
             <Alert type="alert-error">
                 <iconify-icon icon="material-symbols:error" width="32" height="32"></iconify-icon>
                 <div>
                     <h3 class="font-bold">Cannot load posts!</h3>
-                    <div class="text-xs">Error found: {error}</div>
+                    <div class="text-xs">Error found: {JSON.stringify(error.message)}</div>
                 </div>
             </Alert>
         {/await}
