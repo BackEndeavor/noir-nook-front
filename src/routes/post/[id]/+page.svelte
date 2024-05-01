@@ -63,12 +63,10 @@
         summaryModal.showModal()
         const summary = await summaryPost(data.session.access_token, parseInt(data.postId))
         if (!summary.ok) {
-            console.log(postSummary)
             postSummary = summary.errorMessage || "Unknown error"
             return
         }
         postSummary = summary.summary
-        console.log(postSummary)
     }
 
     const carta = new Carta({
@@ -136,7 +134,7 @@
             <PostImage>
                 <img src={data.post.image_preview} alt=""/>
             </PostImage>
-            <MarkdownEditor mode="tabs"  theme="github" bind:value {carta}/>
+            <MarkdownEditor mode="tabs" textarea={{disabled: true}} disableToolbar={true} theme="github" bind:value {carta}/>
         {:else if !(data?.post?.ok)}
             {data?.post?.errorMessage}
         {:else}
