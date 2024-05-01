@@ -3,10 +3,11 @@
     import 'iconify-icon';
     import Logo from "$lib/icon/Logo.svelte";
     import ThemeButton from "$lib/ui/util/ThemeButton.svelte";
-    import {SignIn, SignOut} from "@auth/sveltekit/components";
+    import {SignIn} from "@auth/sveltekit/components";
     import type {PageData} from './$types';
     import {Toaster} from "svelte-daisyui-toast";
     import ScrollToTop from "$lib/ui/util/ScrollToTop.svelte";
+    import {signOut} from "@auth/sveltekit/client";
 
     let searchInput = '';
 
@@ -15,6 +16,7 @@
     }
 
     export let data: PageData;
+
 </script>
 
 <ScrollToTop/>
@@ -50,7 +52,9 @@
                             <button>{data?.session?.user?.name}</button>
                         </li>
                         <li>
-                            <SignOut signOutPage="signout"></SignOut>
+                            <button on:click={signOut}>
+                                Sign out
+                            </button>
                         </li>
                     </button>
                 </div>
