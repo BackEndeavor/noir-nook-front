@@ -123,7 +123,7 @@ export const summaryPost = (access_token: string, post_id: number) => {
         },
     }).then(async data => {
         const jsonData = await data.json();
-        const summaryText = jsonData['summary'].map(summary => summary.summary_text).join(" ")
+        const summaryText = jsonData['summary'].map((summary: { summary_text: string; }) => summary.summary_text).join(" ")
         const response: SummaryPostResponse & Response  = {
             summary: summaryText,
             ok: false,
