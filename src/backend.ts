@@ -81,6 +81,26 @@ export const fetchPosts = (access_token: string, page: number, limit: number = P
         })
 }
 
+export const updatePost = (access_token: string, post: Post) => {
+    return fetch(`${BACKEND_URL}/${post.id}/`, {
+        method: "PATCH",
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title: post.title,
+            content: post.content,
+        })
+    }).then(response => {
+        console.log(response.ok)
+        console.log(response.status)
+        console.log(response.statusText)
+        console.log(response.json())
+        return response
+    })
+}
+
 export const fetchPost = (access_token: string, post_id: number) => {
     return fetch(`${BACKEND_URL}/${post_id}`, {
         headers: {

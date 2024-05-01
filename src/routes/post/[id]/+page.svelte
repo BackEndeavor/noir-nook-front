@@ -82,8 +82,6 @@
             code()
         ]
     });
-
-    export let value = data?.post?.content;
 </script>
 
 <Post>
@@ -134,7 +132,7 @@
             <PostImage>
                 <img src={data.post.image_preview} alt=""/>
             </PostImage>
-            <MarkdownEditor mode="tabs" textarea={{disabled: true}} disableToolbar={true} theme="github" bind:value {carta}/>
+            <MarkdownEditor mode="tabs" textarea={{disabled: true}} disableToolbar={true} theme="github" bind:value={data.post.content} {carta}/>
         {:else if !(data?.post?.ok)}
             {data?.post?.errorMessage}
         {:else}
