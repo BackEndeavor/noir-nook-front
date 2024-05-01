@@ -13,6 +13,14 @@
     import Avatar from "$lib/ui/data/Avatar.svelte";
     import {deletePost, summaryPost} from "../../../backend";
     import {goto} from "$app/navigation";
+    import {Carta, MarkdownEditor} from "carta-md";
+    import {attachment} from "@cartamd/plugin-attachment";
+    import {emoji} from "@cartamd/plugin-emoji";
+    import {slash} from "@cartamd/plugin-slash";
+    import {code} from "@cartamd/plugin-code";
+    import DOMPurify from "isomorphic-dompurify";
+
+    import '$lib/styles/github.css';
 
     export let data;
 
@@ -62,6 +70,22 @@
         postSummary = summary.summary
         console.log(postSummary)
     }
+
+    const carta = new Carta({
+        sanitizer: DOMPurify.sanitize,
+        extensions: [
+            attachment({
+                async upload() {
+                    return 'some-url-from-server.xyz';
+                }
+            }),
+            emoji(),
+            slash(),
+            code()
+        ]
+    });
+
+    export let value = data?.post?.content;
 </script>
 
 <Post>
@@ -112,7 +136,7 @@
             <PostImage>
                 <img src={data.post.image_preview} alt=""/>
             </PostImage>
-            {data.post.content}
+            <MarkdownEditor mode="tabs"  theme="github" bind:value {carta}/>
         {:else if !(data?.post?.ok)}
             {data?.post?.errorMessage}
         {:else}
