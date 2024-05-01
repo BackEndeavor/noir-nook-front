@@ -6,3 +6,20 @@
     transition: .5s ease-in-out;
     transition-property: background-color, border-color, text-color, border-bottom-color, border-left-color, border-right-color, border-top-color;
 }
+
+iconify-icon {
+    transition: .5s ease-in-out;
+    transition-property: color;
+    color: oklch(var(--b1));
+}
+
+iconify-icon.neutral {
+    transition: .5s ease-in-out;
+    transition-property: color;
+    color: oklch(var(--n));
+}
+
+:root {
+    --glass-reflex-opacity: 0;
+    --glass-blur: 0.7;
+}

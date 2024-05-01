@@ -32,6 +32,8 @@
 	"type": "module",
 	"dependencies": {
 		"@auth/sveltekit": "^1.0.0",
-		"iconify-icon": "^2.1.0"
+		"@tailwindcss/typography": "^0.5.12",
+		"iconify-icon": "^2.1.0",
+		"svelte-daisyui-toast": "^0.0.4"
 	}
 }
